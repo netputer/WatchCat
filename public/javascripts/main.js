@@ -31,6 +31,8 @@ $(function () {
         $modalStatus.addClass('active wc-modal-loading');
         $modalContent.html('Please wait...');
 
+        window.ga('send', 'event', 'btn-book', 'tap', userName);
+
         $.ajax({
             type: 'POST',
             url: '/api/book/' + roomName,
