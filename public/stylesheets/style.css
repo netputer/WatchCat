@@ -17,6 +17,10 @@
     padding-right: 15px;
 }
 
+.wc-room-declined {
+    opacity: .25;
+}
+
 .wc-input-row {
     margin: -11px -65px -11px -15px;
     overflow: hidden;

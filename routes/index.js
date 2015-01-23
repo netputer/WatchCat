@@ -141,7 +141,7 @@ router.get('/room/:name', function (req, res, next) {
         calendar.events.list({
             auth: authClient,
             calendarId: room.id,
-            fields: 'items(end,organizer,start,summary)',
+            fields: 'items(attendees,end,organizer,start,summary)',
             orderBy: 'startTime',
             singleEvents: true,
             timeMin: moment().format(),
@@ -153,7 +153,17 @@ router.get('/room/:name', function (req, res, next) {
                 return callback(error.message);
             }
 
-            callback(null, resp.items);
+            var items = resp.items;
+
+            _.each(items, function (item) {
+                _.each(item.attendees, function (attendee) {
+                    if (attendee.email === room.id) {
+                        item.roomAccepted = attendee.responseStatus === 'accepted';
+                    }
+                });
+            });
+
+            callback(null, items);
         });
     }], function (error, events) {
         if (error) {
