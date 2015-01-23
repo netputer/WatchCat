@@ -78,8 +78,6 @@ router.get('/room/available', function (req, res, next) {
             resource: {
                 calendarExpansionMax: roomIds.length,
                 items: roomIds,
-                // timeMin: '2014-10-24T14:00:00+08:00',
-                // timeMax: '2014-10-24T16:00:00+08:00',
                 timeMin: moment().format(),
                 timeMax: moment().add(1, 'h').format(),
                 timeZone: 'Asia/Shanghai'
@@ -146,8 +144,6 @@ router.get('/room/:name', function (req, res, next) {
             fields: 'items(end,organizer,start,summary)',
             orderBy: 'startTime',
             singleEvents: true,
-            // timeMin: '2014-10-24T00:00:00+08:00',
-            // timeMax: '2014-10-25T00:00:00+08:00',
             timeMin: moment().format(),
             timeMax: moment().format('YYYY-MM-DDT23:59:59+08:00'),
             timeZone: 'Asia/Shanghai'
@@ -228,7 +224,7 @@ router.post('/api/book/:name', function (req, res, next) {
     }
 
     var email = req.body.username.split('@')[0] + '@' + config.fetcher.domain;
-    var summary = req.body.summary;
+    var summary = 'Booked by Watch Cat';
     var timeStart = moment().format();
     var timeEnd = moment().add(30, 'm').format();
 

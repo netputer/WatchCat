@@ -6,12 +6,11 @@ $(function () {
     };
 
     var $inputUsername = $('#js-input-username');
-    var $inputDescription = $('#js-input-description');
     var $btnBook = $('#js-btn-book');
     var $modalStatus = $('#js-modal-status');
 
     $('input').on('keyup', function (e) {
-        $btnBook.toggleClass('disabled', !$inputUsername.val() || !$inputDescription.val());
+        $btnBook.toggleClass('disabled', !$inputUsername.val());
     });
 
     $btnBook.on('touchend', function (e) {
@@ -23,7 +22,6 @@ $(function () {
         var regexResult = location.pathname.match(/\/book\/(.*)/) || [];
         var roomName = regexResult[1];
         var userName = $inputUsername.val();
-        var eventSummary = $inputDescription.val();
         var $modalContent = $modalStatus.find('.content-padded');
 
         window.localStorage.setItem('username', userName);
@@ -38,7 +36,6 @@ $(function () {
             url: '/api/book/' + roomName,
             data: {
                 username: userName,
-                summary: eventSummary
             },
             success: function (data) {
                 $modalContent.html('<span class="icon icon-check"></span> Enjoy your meeting :-)');
@@ -57,7 +54,7 @@ $(function () {
         $inputUsername.val(storage.getItem('username'));
     }
 
-    $btnBook.toggleClass('disabled', !$inputUsername.val() || !$inputDescription.val());
+    $btnBook.toggleClass('disabled', !$inputUsername.val());
     $modalStatus.show();
 
     // jshint ignore:start
