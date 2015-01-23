@@ -226,7 +226,7 @@ router.post('/api/book/:name', function (req, res, next) {
         });
     }
 
-    if (!req.body.username || !req.body.summary) {
+    if (!req.body.username) {
         return res.status(403).json({
             message: 'Missing parameters',
             status: 403
