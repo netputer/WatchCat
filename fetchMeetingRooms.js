@@ -69,6 +69,10 @@ async.waterfall([
 
             var name = processName(item.resourceCommonName);
 
+            if (name.indexOf('*tips-') > -1) {
+                return;
+            }
+
             result[name] = {
                 id: item.resourceEmail,
                 key: name,
